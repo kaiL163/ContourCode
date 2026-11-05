@@ -12,22 +12,7 @@ docker compose --env-file .env.example up --build -d
 
 Откройте [http://localhost:8080](http://localhost:8080). API доступно по адресу `http://localhost:8080/api`.
 
-Файл `.env.example` содержит только локальные демонстрационные параметры и исключён из Git. Если его нет после клонирования, создайте его в корне проекта со следующими значениями:
-
-```dotenv
-APP_DB_NAME=app
-APP_DB_USER=app
-APP_DB_PASSWORD=change-me-app-db
-JWT_SECRET=change-me-long-random-signing-secret
-JUDGE0_LANGUAGE_ID=54
-FRONTEND_PORT=8080
-REDIS_PASSWORD=change-me-judge0-redis
-POSTGRES_HOST=judge0-db
-POSTGRES_PORT=5432
-POSTGRES_DB=judge0
-POSTGRES_USER=judge0
-POSTGRES_PASSWORD=change-me-judge0-db
-```
+Файл `.env.example` содержит параметры для локального запуска. Перед запуском при необходимости замените значения на свои. Не используйте демонстрационные пароли и ключ подписи за пределами локальной разработки.
 
 Для остановки контейнеров используйте:
 
