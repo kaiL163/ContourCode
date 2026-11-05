@@ -1,0 +1,9 @@
+# Local demonstration configuration only; replace passwords before use.
+REDIS_PASSWORD=change-me-judge0-redis
+POSTGRES_HOST=judge0-db
+POSTGRES_PORT=5432
+POSTGRES_DB=judge0
+POSTGRES_USER=judge0
+POSTGRES_PASSWORD=change-me-judge0-db
+REDIS_HOST=judge0-redis
+REDIS_PORT=6379

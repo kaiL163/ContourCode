@@ -1,0 +1,78 @@
+name: kontur-kod
+services:
+  db:
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: ${APP_DB_NAME:-app}
+      POSTGRES_USER: ${APP_DB_USER:-app}
+      POSTGRES_PASSWORD: '${APP_DB_PASSWORD:?Set APP_DB_PASSWORD in .env.example}'
+    volumes:
+      - app-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    networks: [app]
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: "postgresql://${APP_DB_USER:-app}:${APP_DB_PASSWORD:?Set APP_DB_PASSWORD in .env.example}@db:5432/${APP_DB_NAME:-app}"
+      JWT_SECRET: '${JWT_SECRET:?Set TOKEN_SECRET in .env.example}'
+      JUDGE0_URL: http://judge0:2358
+      JUDGE0_LANGUAGE_ID: ${JUDGE0_LANGUAGE_ID:-54}
+    depends_on:
+      db: {condition: service_healthy}
+      judge0: {condition: service_started}
+    restart: unless-stopped
+    networks: [app, judge0]
+  frontend:
+    build: ./frontend
+    ports: ["127.0.0.1:${FRONTEND_PORT:-8080}:80"]
+    depends_on: [backend]
+    restart: unless-stopped
+    networks: [app]
+  judge0:
+    image: mrkushalsm/judge0@sha256:d60605ad448453ac3754629bc7121d379cf691e0c091aabbc03ff2886b2626b2
+    volumes: ["./judge0.conf.example:/judge0.conf:ro"]
+    privileged: true
+    depends_on:
+      judge0-db: {condition: service_healthy}
+      judge0-redis: {condition: service_started}
+    restart: always
+    networks: [judge0]
+  judge0-worker:
+    image: mrkushalsm/judge0@sha256:d60605ad448453ac3754629bc7121d379cf691e0c091aabbc03ff2886b2626b2
+    command: ["./scripts/workers"]
+    cgroup: host
+    volumes: ["./judge0.conf.example:/judge0.conf:ro"]
+    privileged: true
+    depends_on: {judge0: {condition: service_started}}
+    restart: always
+    networks: [judge0]
+  judge0-db:
+    image: postgres:16.2
+    env_file: .env.example
+    volumes:
+      - judge0-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: always
+    networks: [judge0]
+  judge0-redis:
+    image: redis:7.2.4
+    env_file: .env.example
+    command: ["bash", "-c", "docker-entrypoint.sh --appendonly no --requirepass \"$$REDIS_PASSWORD\""]
+    restart: always
+    networks: [judge0]
+volumes:
+  app-db-data:
+  judge0-db-data:
+networks:
+  app: {}
+  judge0:
+    internal: true

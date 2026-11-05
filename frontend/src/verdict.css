@@ -1,0 +1,11 @@
+.verdict-badge{display:inline-flex;align-items:center;gap:0;padding:4px 9px;border-radius:4px;font-size:13px;line-height:20px;font-weight:600;white-space:normal;background:#edf1ef;color:#46564d}
+.verdict-ok{background:#e1f1e6;color:#175b34}
+.verdict-wa,.verdict-re,.verdict-ce{background:#fbe9e7;color:#8b2923}
+.verdict-tle{background:#fff0d3;color:#795000}
+.verdict-checker_error{background:#f0e9f5;color:#633c78}
+html[data-theme='dark'] .verdict-badge{background:#343d3a;color:#d4e0d8}
+html[data-theme='dark'] .verdict-ok{background:#214936;color:#c2efd0}
+html[data-theme='dark'] .verdict-wa,html[data-theme='dark'] .verdict-re,html[data-theme='dark'] .verdict-ce{background:#542d2b;color:#ffd1cb}
+html[data-theme='dark'] .verdict-tle{background:#4c3a1d;color:#ffe0a2}
+html[data-theme='dark'] .verdict-checker_error{background:#46334e;color:#ecd1f5}
+.recent-result .verdict-badge{margin-left:6px}

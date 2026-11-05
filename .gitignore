@@ -1,0 +1,26 @@
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.tsbuildinfo
+
+# Local credentials and Python artifacts
+.env
+.env.*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Keep the root README; exclude other project notes and reference materials
+/*.md
+!/README.md
+/.agents/
+/design/
+/*.pdf
+
+# Keep generated and local-only files out of commits
+.DS_Store
+Thumbs.db
+*.log
+

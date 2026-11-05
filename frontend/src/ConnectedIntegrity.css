@@ -1,0 +1,6 @@
+.integrity-history .timeline-row{grid-template-columns:minmax(100px,auto) 14px minmax(0,1fr);align-items:start}
+.integrity-history .timeline-time{white-space:normal;line-height:1.4}
+.integrity-history .timeline-entry{min-width:0}
+.integrity-report{max-width:100%;max-height:24rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font:12px/1.6 var(--mono)}
+.integrity-history .code-compare pre{overflow:auto;white-space:pre;max-height:28rem}
+@media(max-width:650px){.integrity-history .timeline-row{grid-template-columns:82px 12px minmax(0,1fr);gap:8px}.integrity-history .timeline-time{font-size:10px}.similarity-panel .panel-heading{align-items:flex-start;flex-wrap:wrap}.similarity-panel .panel-heading .button{width:100%}}

@@ -1,0 +1,147 @@
+/* Scoped dark-mode refinements. Light and system themes remain untouched. */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #171A1E;
+  --panel: #22262B;
+  --panel2: #2C3238;
+  --border: #49525B;
+  --text: #F0F3F4;
+  --muted: #C6CFD3;
+  --faint: #B1BCC1;
+  --green: #A3D6B2;
+  --green-deep: #2C3238;
+  --purple: #A3D6B2;
+  --purple-deep: #2C3238;
+  --blue: #A3D6B2;
+  --blue-deep: #2C3238;
+  color: var(--text);
+  background: var(--bg);
+}
+
+html[data-theme='dark'] body,
+html[data-theme='dark'] .landing,
+html[data-theme='dark'] .topbar,
+html[data-theme='dark'] .sidebar,
+html[data-theme='dark'] .mobile-bottom,
+html[data-theme='dark'] .sidebar.open {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+html[data-theme='dark'] .landing {
+  background-image: none;
+}
+html[data-theme='dark'] .landing:before {
+  border-color: #414E45;
+  box-shadow: 0 0 0 40px #414E4514, 0 0 0 90px #414E450D, 0 0 0 160px #414E4508;
+}
+html[data-theme='dark'] .landing h1 {
+  background: none;
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+}
+
+html[data-theme='dark'] .entry-card,
+html[data-theme='dark'] .featured-round,
+html[data-theme='dark'] .panel,
+html[data-theme='dark'] .task-rail,
+html[data-theme='dark'] .problem-panel,
+html[data-theme='dark'] .editor-panel,
+html[data-theme='dark'] .task-library,
+html[data-theme='dark'] .contest-list {
+  background-color: var(--panel);
+  color: var(--text);
+  border-color: var(--border);
+}
+html[data-theme='dark'] .landing .entry-card { background: transparent; }
+html[data-theme='dark'] .round-brief,
+html[data-theme='dark'] .pair-option-list button,
+html[data-theme='dark'] .results-summary,
+html[data-theme='dark'] .match-banner,
+html[data-theme='dark'] .review-card,
+html[data-theme='dark'] .quick-actions,
+html[data-theme='dark'] .integrity-callout,
+html[data-theme='dark'] .side-help,
+html[data-theme='dark'] .task-picker,
+html[data-theme='dark'] .form-note,
+html[data-theme='dark'] .compare-pair {
+  background-color: var(--panel2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+html[data-theme='dark'] :where(.brand-strong,.landing-event>span,.text-link,.mode-link,.back-link,.text-button,.rail-hint strong,.rail-title span,.task-select .check-mark,.contest-state,.round-brief li b) {
+  color: var(--green);
+}
+html[data-theme='dark'] .brand-mark { border-color: var(--green); }
+html[data-theme='dark'] .brand-mark i { background: var(--green); }
+html[data-theme='dark'] .button.primary {
+  background: var(--green);
+  color: #17231C;
+  border-color: var(--green);
+}
+html[data-theme='dark'] .button.primary:hover {
+  background: #B7D9BF;
+  color: #17231C;
+}
+html[data-theme='dark'] .button.secondary {
+  background: var(--panel);
+  color: var(--text);
+  border-color: #789581;
+}
+html[data-theme='dark'] .button.ghost { color: var(--green); }
+html[data-theme='dark'] .nav-item,
+html[data-theme='dark'] .mobile-bottom button { color: var(--muted); }
+html[data-theme='dark'] .nav-item.active,
+html[data-theme='dark'] .mobile-bottom button.selected,
+html[data-theme='dark'] .task-select.chosen {
+  background: var(--panel2);
+  color: var(--text);
+  border-color: #789581;
+}
+html[data-theme='dark'] .competition-overview .pair-option-list button,
+html[data-theme='dark'] .quick-actions>button,
+html[data-theme='dark'] .filter-chip {
+  background: var(--panel);
+  border-color: var(--border);
+  color: var(--text);
+}
+html[data-theme='dark'] .competition-overview .pair-option-list button:hover,
+html[data-theme='dark'] .quick-actions>button:hover,
+html[data-theme='dark'] .filter-chip.active,
+html[data-theme='dark'] .nav-item:hover,
+html[data-theme='dark'] .task-select:hover { background: var(--panel2); color: var(--text); }
+
+html[data-theme='dark'] .select-wrap select,
+html[data-theme='dark'] .participant-select,
+html[data-theme='dark'] .copy-row input,
+html[data-theme='dark'] .create-form input,
+html[data-theme='dark'] .create-form select,
+html[data-theme='dark'] .create-form textarea,
+html[data-theme='dark'] .human-review textarea,
+html[data-theme='dark'] .search-field,
+html[data-theme='dark'] .editor-wrap,
+html[data-theme='dark'] .code-compare {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+html[data-theme='dark'] .search-field input,
+html[data-theme='dark'] .editor-wrap textarea { color: var(--text); }
+html[data-theme='dark'] :where(.landing-intro,.landing-note,.landing-event p,.landing-event small,.entry-card>p,.entry-footer,.landing-foot,.page-heading p,.body-copy,.subtle,.field-note,.rail-hint,.side-help p,.quick-actions small,.theme-switcher) { color: var(--muted); }
+html[data-theme='dark'] .theme-options { background: var(--bg); border-color: var(--border); }
+html[data-theme='dark'] .theme-options button { color: var(--muted); }
+html[data-theme='dark'] .theme-options button[aria-pressed='true'] { background: var(--panel2); color: var(--text); }
+html[data-theme='dark'] .status.ok,
+html[data-theme='dark'] .state-pill.open,
+html[data-theme='dark'] .timer-chip,
+html[data-theme='dark'] .live-indicator,
+html[data-theme='dark'] .private-label { background: var(--panel2); color: #C1E0C8; border-color: #567B60; }
+html[data-theme='dark'] .status.bad { background: #492D2B; color: #FFD2CC; border-color: #A56E68; }
+html[data-theme='dark'] .status.warn,
+html[data-theme='dark'] .state-pill.draft { background: #453A25; color: #FFE3A8; border-color: #9E8858; }
+html[data-theme='dark'] button:focus-visible,
+html[data-theme='dark'] a:focus-visible,
+html[data-theme='dark'] input:focus-visible,
+html[data-theme='dark'] textarea:focus-visible,
+html[data-theme='dark'] select:focus-visible { outline: 2px solid #B7D9BF; outline-offset: 3px; }
