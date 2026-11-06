@@ -45,6 +45,9 @@ export default function CodeEditor({ value, onChange }: Props) {
           basicSetup,
           cpp(),
           syntaxHighlighting(highlighting),
+          EditorState.changeFilter.of((transaction) =>
+            !transaction.isUserEvent("delete.cut"),
+          ),
           EditorView.contentAttributes.of({
             "aria-label": "Исходный код решения на C++17",
             spellcheck: "false",
@@ -63,7 +66,38 @@ export default function CodeEditor({ value, onChange }: Props) {
       }),
     });
     editor.current = view;
+
+    const blockClipboard = (event: ClipboardEvent) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    };
+    const blockClipboardKeys = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase();
+      const modifier = event.ctrlKey || event.metaKey;
+      const clipboardShortcut = modifier && ["c", "v", "x"].includes(key);
+      const alternateShortcut =
+        (event.shiftKey && (key === "insert" || key === "delete")) ||
+        (event.shiftKey && key === "з");
+      if (clipboardShortcut || alternateShortcut) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    };
+    const blockContextMenu = (event: MouseEvent) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    };
+    view.dom.addEventListener("copy", blockClipboard, true);
+    view.dom.addEventListener("cut", blockClipboard, true);
+    view.dom.addEventListener("paste", blockClipboard, true);
+    view.dom.addEventListener("keydown", blockClipboardKeys, true);
+    view.dom.addEventListener("contextmenu", blockContextMenu, true);
     return () => {
+      view.dom.removeEventListener("copy", blockClipboard, true);
+      view.dom.removeEventListener("cut", blockClipboard, true);
+      view.dom.removeEventListener("paste", blockClipboard, true);
+      view.dom.removeEventListener("keydown", blockClipboardKeys, true);
+      view.dom.removeEventListener("contextmenu", blockContextMenu, true);
       view.destroy();
       editor.current = null;
     };
