@@ -14,6 +14,8 @@ import {
 import VerdictBadge from "./VerdictBadge";
 import { ContestCover } from "./ContestPage";
 import BrowserActivityMonitor from "./BrowserActivityMonitor";
+import CodeHistoryPanel from "./CodeHistoryPanel";
+import { useCodeHistory, type SaveStatus } from "./useCodeHistory";
 import {
   demoExamplesForTask,
   sumDemoNames,
@@ -316,6 +318,39 @@ export function TaskView({
   const [result, setResult] = useState<Submission | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [historyFromMemory, setHistoryFromMemory] = useState(false);
+  const saveLabel: Record<SaveStatus, string> = {
+    idle: "",
+    saving: "Сохранение…",
+    saved: "Сохранено",
+    failed: "Не удалось сохранить",
+  };
+  const history = useCodeHistory({
+    enabled: user.role === "participant" && Boolean(match || contest),
+    userId: user.id,
+    contestId: match ? null : (contest?.id ?? null),
+    matchId: match?.id ?? null,
+    taskId: id,
+    code,
+    ready: draftReadyTaskId === id && id != null,
+    fromMemory: historyFromMemory,
+    allowPending: match?.mode !== "team",
+    onRestore: (task, value) => {
+      setCode(value);
+      setCodeByTask((previous) => ({ ...previous, [task]: value }));
+    },
+  });
+  useEffect(() => {
+    if (user.role !== "participant") return;
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+        event.preventDefault();
+        void history.saveNow();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [history.saveNow, user.role]);
   useEffect(() => {
     setId(
       available.find((t) => t.id === initialTaskId)?.id ??
@@ -343,6 +378,7 @@ export function TaskView({
       saved ??
       (initialName && taskExamples ? taskExamples[initialName] : defaultCode);
     setCode(initial);
+    setHistoryFromMemory(saved !== undefined || sharedDraft !== undefined);
     setDraftReadyTaskId(id);
     setDemo(
       taskExamples
@@ -414,11 +450,13 @@ export function TaskView({
     setError("");
     setBusy(true);
     try {
+      const sessionId = await history.flush();
       setResult(
         await api.submit({
           ...(match ? { match_id: match.id } : { contest_id: contest!.id }),
           task_id: id,
           source_code: code,
+          ...(sessionId ? { session_id: sessionId } : {}),
         }),
       );
     } catch (e) {
@@ -619,18 +657,35 @@ export function TaskView({
             }}
           />
           <div className="editor-actions">
-            <button
-              className="button primary"
-              disabled={
-                busy ||
-                !id ||
-                user.role !== "participant" ||
-                (match !== null && match.status !== "active")
-              }
-              onClick={send}
-            >
-              {busy ? "Отправка…" : "Отправить решение"}
-            </button>
+            {user.role === "participant" && (
+              <span className={`code-save-state is-${history.status}`} role="status">
+                {saveLabel[history.status]}
+              </span>
+            )}
+            <div className="editor-action-buttons">
+              {user.role === "participant" && (
+                <button
+                  type="button"
+                  className="button secondary"
+                  disabled={!id}
+                  onClick={() => void history.saveNow()}
+                >
+                  Сохранить
+                </button>
+              )}
+              <button
+                className="button primary"
+                disabled={
+                  busy ||
+                  !id ||
+                  user.role !== "participant" ||
+                  (match !== null && match.status !== "active")
+                }
+                onClick={send}
+              >
+                {busy ? "Отправка…" : "Отправить решение"}
+              </button>
+            </div>
           </div>
           {result && (
             <div className="recent-result" role="status">
@@ -657,6 +712,12 @@ export function ResultsView({
   const [rows, setRows] = useState<StandingRow[]>([]);
   const [error, setError] = useState("");
   const [taskIds, setTaskIds] = useState<number[]>([]);
+  const [historyTarget, setHistoryTarget] = useState<{
+    userId: number;
+    name: string;
+    taskId: number;
+    title: string;
+  } | null>(null);
   useEffect(() => {
     if (!contest) return;
     let live = true;
@@ -784,6 +845,22 @@ export function ResultsView({
                                   {wrongCount} {wrongLabel} · −{task.points_lost} баллов
                                 </span>
                               )}
+                              {user.role === "organizer" && (
+                                <button
+                                  type="button"
+                                  className="results-history-link"
+                                  onClick={() =>
+                                    setHistoryTarget({
+                                      userId: row.user_id,
+                                      name: row.display_name,
+                                      taskId,
+                                      title,
+                                    })
+                                  }
+                                >
+                                  История кода
+                                </button>
+                              )}
                             </div>
                           );
                         })}
@@ -802,6 +879,16 @@ export function ResultsView({
           <p className="body-copy">Пока нет участников с регистрацией.</p>
         )}
       </section>
+      {user.role === "organizer" && historyTarget && (
+        <CodeHistoryPanel
+          contestId={contest.id}
+          taskId={historyTarget.taskId}
+          userId={historyTarget.userId}
+          participantName={historyTarget.name}
+          taskTitle={historyTarget.title}
+          onClose={() => setHistoryTarget(null)}
+        />
+      )}
     </>
   );
 }

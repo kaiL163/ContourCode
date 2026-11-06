@@ -16,6 +16,10 @@ from fastapi import (
 from pydantic import BaseModel, ConfigDict, Field
 from fastapi.encoders import jsonable_encoder
 from .browser_activity import attach_routes as attach_browser_activity_routes
+from .code_history import (
+    attach_routes as attach_code_history_routes,
+    record_submission_version,
+)
 
 app = FastAPI(title="КонтурКод API", version="1")
 
@@ -247,6 +251,7 @@ class SubmissionIn(BaseModel):
     task_id: int
     source_code: str = Field(min_length=1, max_length=100000)
     match_id: int | None = None
+    session_id: str | None = None
 
 
 class MatchIn(BaseModel):
@@ -710,6 +715,16 @@ def submit(
                 body.source_code,
             ),
         ).fetchone()
+        record_submission_version(
+            c,
+            user_id=user["id"],
+            contest_id=body.contest_id,
+            match_id=body.match_id,
+            task_id=body.task_id,
+            session_id=body.session_id,
+            submission_id=row[0],
+            code_content=body.source_code,
+        )
     background_tasks.add_task(_check_submission, row[0], body.task_id, body.source_code)
     return _submission(row[0], user)
 
@@ -1202,6 +1217,9 @@ def integrity_conclusion(cid: int, body: dict, user=Depends(require_role("organi
 
 
 attach_browser_activity_routes(
+    app, connection=connection, current_user=current_user, require_role=require_role
+)
+attach_code_history_routes(
     app, connection=connection, current_user=current_user, require_role=require_role
 )
 

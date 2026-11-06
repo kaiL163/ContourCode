@@ -166,6 +166,71 @@ export interface BrowserActivityEventRow {
   duration_ms: number | null;
   duration_unknown: boolean;
 }
+export type CodeChangeType = "INITIAL" | "AUTOSAVE" | "MANUAL_SAVE" | "SUBMISSION";
+export interface CodeVersionSummary {
+  id: number;
+  user_id: number;
+  contest_id: number | null;
+  match_id: number | null;
+  task_id: number;
+  session_id: string;
+  submission_id: number | null;
+  version_number: number;
+  content_hash: string;
+  change_type: CodeChangeType;
+  added_lines: number;
+  removed_lines: number;
+  code_size: number;
+  created_at: string;
+  created?: boolean;
+}
+export interface CodeVersion extends CodeVersionSummary {
+  code_content: string;
+}
+export interface CodeHistoryAnalytics {
+  version_count: number;
+  change_count: number;
+  added_lines: number;
+  removed_lines: number;
+  duration_seconds: number;
+  gaps_seconds: number[];
+  median_gap_seconds: number;
+  first_to_last_added_lines: number;
+  first_to_last_removed_lines: number;
+  first_to_last_changed_lines: number;
+  disclaimer: string;
+}
+export interface CodeHistoryPage {
+  user_id: number;
+  contest_id: number | null;
+  match_id: number | null;
+  task_id: number;
+  total: number;
+  limit: number;
+  offset: number;
+  versions: CodeVersionSummary[];
+  analytics: CodeHistoryAnalytics;
+  latest_code: string | null;
+  disclaimer: string;
+}
+export interface CodeDiffRow {
+  kind: "same" | "added" | "removed" | "changed";
+  left: string | null;
+  right: string | null;
+  left_line: number | null;
+  right_line: number | null;
+}
+export interface CodeDiff {
+  from_version_id: number;
+  to_version_id: number;
+  from_version_number: number;
+  to_version_number: number;
+  added_lines: number;
+  removed_lines: number;
+  changed_lines: number;
+  rows: CodeDiffRow[];
+  unified: string;
+}
 export interface BrowserActivityDetail {
   contest_id: number;
   user_id: number;
@@ -262,8 +327,50 @@ export const api = {
     body: (
       | { contest_id: number; match_id?: never }
       | { match_id: number; contest_id?: never }
-    ) & { task_id: number; source_code: string },
+    ) & { task_id: number; source_code: string; session_id?: string },
   ) => request<Submission>("/submissions", json(body)),
+  saveCodeVersion: (
+    body: {
+      contest_id: number | null;
+      match_id: number | null;
+      task_id: number;
+      session_id: string;
+      code_content: string;
+      change_type: "INITIAL" | "AUTOSAVE" | "MANUAL_SAVE";
+      client_request_id: string;
+    },
+    options?: { keepalive?: boolean },
+  ) =>
+    request<CodeVersionSummary>("/code-history/versions", {
+      method: "POST",
+      body: JSON.stringify(body),
+      keepalive: options?.keepalive,
+    }),
+  codeHistory: (
+    taskId: number,
+    query: {
+      contestId?: number | null;
+      matchId?: number | null;
+      userId?: number;
+      limit?: number;
+      offset?: number;
+      includeLatestCode?: boolean;
+    } = {},
+  ) => {
+    const params = new URLSearchParams();
+    if (query.contestId != null) params.set("contest_id", String(query.contestId));
+    if (query.matchId != null) params.set("match_id", String(query.matchId));
+    if (query.userId != null) params.set("user_id", String(query.userId));
+    if (query.limit != null) params.set("limit", String(query.limit));
+    if (query.offset != null) params.set("offset", String(query.offset));
+    if (query.includeLatestCode) params.set("include_latest_code", "true");
+    return request<CodeHistoryPage>(`/code-history/tasks/${taskId}?${params}`);
+  },
+  codeVersion: (id: number) => request<CodeVersion>(`/code-history/versions/${id}`),
+  codeDiff: (versionId: number, otherVersionId: number) =>
+    request<CodeDiff>(`/code-history/versions/${versionId}/diff/${otherVersionId}`),
+  submissionCodeVersion: (submissionId: number) =>
+    request<CodeVersion>(`/code-history/submissions/${submissionId}`),
   submission: (id: number) => request<Submission>(`/submissions/${id}`),
   submissions: (contestId: number) =>
     request<Submission[]>(

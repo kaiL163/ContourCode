@@ -17,6 +17,7 @@ import "./task-bank.scss";
 import "./integrity-redesign.scss";
 import "./task-workbench.scss";
 import "./form-controls.scss";
+import "./code-history.scss";
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,0 +1,161 @@
+.app-shell .editor-actions .code-save-state {
+  margin-right: auto;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.app-shell .code-save-state.is-saved {
+  color: var(--green);
+}
+.app-shell .code-save-state.is-failed {
+  color: var(--red);
+}
+.app-shell .editor-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.app-shell .results-history-link {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--green);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.app-shell .code-history {
+  margin-top: 16px;
+}
+.app-shell .code-history-heading,
+.app-shell .code-history-nav,
+.app-shell .code-history-compare {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.app-shell .code-history-heading h2,
+.app-shell .code-history h3 {
+  margin: 0 0 4px;
+}
+.app-shell .code-history-heading p,
+.app-shell .code-history-note {
+  margin: 0;
+  color: var(--muted);
+}
+.app-shell .code-history-note {
+  margin: 12px 0;
+  font-size: 14px;
+}
+.app-shell .code-history-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.app-shell .code-history-stats article {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.app-shell .code-history-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+.app-shell .code-history-stats b {
+  display: block;
+  margin-top: 6px;
+  font-size: 20px;
+}
+.app-shell .code-history-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
+  gap: 20px;
+}
+.app-shell .code-history-timeline {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+.app-shell .code-history-timeline button {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.app-shell .code-history-timeline button.selected,
+.app-shell .code-history-table tr.selected {
+  outline: 2px solid var(--green);
+}
+.app-shell .code-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.app-shell .code-history-table th,
+.app-shell .code-history-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.app-shell .code-history-view pre,
+.app-shell .code-diff-grid {
+  overflow: auto;
+  max-height: 420px;
+  margin: 8px 0 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  font: 13px/1.5 var(--mono);
+  white-space: pre;
+}
+.app-shell .code-history-compare {
+  justify-content: flex-start;
+  margin-top: 16px;
+}
+.app-shell .code-history-compare label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.app-shell .code-diff-row {
+  display: grid;
+  grid-template-columns: 3ch minmax(0, 1fr) 3ch minmax(0, 1fr);
+  gap: 8px;
+}
+.app-shell .code-diff-row span {
+  color: var(--muted);
+}
+.app-shell .code-diff-row.is-added code:last-child {
+  background: color-mix(in srgb, var(--green) 25%, transparent);
+}
+.app-shell .code-diff-row.is-removed code:nth-of-type(1) {
+  background: color-mix(in srgb, var(--red) 25%, transparent);
+}
+.app-shell .code-diff-row.is-changed code {
+  background: color-mix(in srgb, var(--green) 18%, transparent);
+}
+@media (max-width: 900px) {
+  .app-shell .code-history-layout {
+    grid-template-columns: 1fr;
+  }
+}
