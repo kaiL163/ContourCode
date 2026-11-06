@@ -15,6 +15,7 @@ from fastapi import (
 )
 from pydantic import BaseModel, ConfigDict, Field
 from fastapi.encoders import jsonable_encoder
+from .browser_activity import attach_routes as attach_browser_activity_routes
 
 app = FastAPI(title="КонтурКод API", version="1")
 
@@ -1198,6 +1199,11 @@ def integrity_conclusion(cid: int, body: dict, user=Depends(require_role("organi
         "comment": comment.strip(),
         "created_at": r[1],
     }
+
+
+attach_browser_activity_routes(
+    app, connection=connection, current_user=current_user, require_role=require_role
+)
 
 
 @app.websocket("/api/ws/matches/{mid}")

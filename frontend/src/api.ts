@@ -115,6 +115,67 @@ export interface IntegrityConclusion {
   comment: string;
   created_at: string;
 }
+export interface BrowserActivityPolicy {
+  retention_days: number;
+  collects: string[];
+  does_not_collect: string[];
+  purpose: string;
+}
+export interface BrowserActivitySession {
+  session_id: string;
+  contest_id: number;
+  user_id: number;
+  started_at: string;
+  monitoring_enabled: boolean;
+  policy: BrowserActivityPolicy;
+}
+export interface BrowserActivitySummary {
+  contest_id: number;
+  title: string;
+  participant_count: number;
+  tab_switches: number;
+  event_count: number;
+  high_focus_loss_participants: number;
+  high_focus_loss_threshold: number;
+  retention_days: number;
+  disclaimer: string;
+  policy: BrowserActivityPolicy;
+}
+export interface BrowserActivityRow {
+  user_id: number;
+  username: string;
+  display_name: string;
+  tab_switches: number;
+  tab_hidden_ms: number;
+  tab_hidden_unknown_intervals: number;
+  window_blurs: number;
+  window_blur_ms: number;
+  window_blur_unknown_intervals: number;
+  fullscreen_exits: number;
+  copy_count: number;
+  paste_count: number;
+  event_count: number;
+  last_activity_at: string | null;
+}
+export interface BrowserActivityEventRow {
+  event_id: string;
+  event_type: string;
+  occurred_at: string;
+  session_id: string;
+  timestamp_untrusted: boolean;
+  duration_ms: number | null;
+  duration_unknown: boolean;
+}
+export interface BrowserActivityDetail {
+  contest_id: number;
+  user_id: number;
+  username: string;
+  display_name: string;
+  disclaimer: string;
+  stats: Omit<BrowserActivityRow, "user_id" | "username" | "display_name">;
+  events: BrowserActivityEventRow[];
+  timeline: BrowserActivityEventRow[];
+}
 const API_BASE =
   (import.meta as ImportMeta & { env: { VITE_API_BASE_URL?: string } }).env
     .VITE_API_BASE_URL ?? "";
@@ -270,4 +331,52 @@ export const api = {
       `/contests/${contestId}/integrity/conclusions`,
       json(body),
     ),
+  startBrowserActivity: (contestId: number) =>
+    request<BrowserActivitySession>(
+      `/contests/${contestId}/browser-activity/session`,
+      { method: "POST" },
+    ),
+  sendBrowserActivity: (
+    contestId: number,
+    sessionId: string,
+    events: unknown[],
+    options?: { keepalive?: boolean },
+  ) =>
+    request<{ accepted: number; duplicates: number }>(
+      `/contests/${contestId}/browser-activity/events`,
+      {
+        method: "POST",
+        body: JSON.stringify({ session_id: sessionId, events }),
+        keepalive: options?.keepalive,
+      },
+    ),
+  browserActivitySummary: (contestId: number) =>
+    request<BrowserActivitySummary>(
+      `/contests/${contestId}/browser-activity/summary`,
+    ),
+  browserActivityParticipants: (
+    contestId: number,
+    query: { q?: string; sort?: string; order?: "asc" | "desc" } = {},
+  ) => {
+    const params = new URLSearchParams();
+    if (query.q) params.set("q", query.q);
+    if (query.sort) params.set("sort", query.sort);
+    if (query.order) params.set("order", query.order);
+    const suffix = params.toString() ? `?${params}` : "";
+    return request<{
+      contest_id: number;
+      disclaimer: string;
+      rows: BrowserActivityRow[];
+    }>(`/contests/${contestId}/browser-activity/participants${suffix}`);
+  },
+  browserActivityParticipant: (contestId: number, userId: number) =>
+    request<BrowserActivityDetail>(
+      `/contests/${contestId}/browser-activity/participants/${userId}`,
+    ),
+  deleteBrowserActivity: (contestId: number) =>
+    request<{
+      deleted_events: number;
+      deleted_sessions: number;
+      retention_days: number;
+    }>(`/contests/${contestId}/browser-activity`, { method: "DELETE" }),
 };

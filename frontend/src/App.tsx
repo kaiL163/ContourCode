@@ -10,6 +10,7 @@ import {
   OrganizerResults,
 } from "./NavigationViews";
 import ConnectedIntegrity from "./ConnectedIntegrity";
+import ActivityMonitor from "./ActivityMonitor";
 import {
   ContestList,
   TaskView,
@@ -96,6 +97,7 @@ type Page =
   | "team"
   | "tasks"
   | "integrity"
+  | "activity"
   | "create-task"
   | "create-contest"
   | "participant-tasks"
@@ -114,6 +116,7 @@ const pagePaths: Record<Page, string> = {
   team: "/teams",
   tasks: "/organizer/tasks",
   integrity: "/organizer/review",
+  activity: "/organizer/activity",
   "create-task": "/organizer/tasks/new",
   "create-contest": "/organizer/contests/new",
   "participant-tasks": "/tasks",
@@ -158,6 +161,8 @@ const icons: Record<string, string> = {
   arrow: "M5 12h14m-7-7 7 7-7 7",
   clock: "M12 8v4l3 2m7-2a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z",
   search: "m21 21-4.35-4.35M19 10.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z",
+  activity:
+    "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
   copy: "M8 8V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4m-12 6h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z",
   bell: "M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 13h4",
   back: "m15 18-6-6 6-6M20 12H9",
@@ -519,6 +524,7 @@ export default function App() {
               { id: "tasks", label: "Банк задач", icon: "code" },
               { id: "organizer-results", label: "Результаты", icon: "chart" },
               { id: "integrity", label: "Разбор отправок", icon: "shield" },
+              { id: "activity", label: "Активность", icon: "activity" },
             ],
           },
         ]
@@ -574,6 +580,7 @@ export default function App() {
     "personal-results": "Итоги",
     "organizer-results": "Итоги",
     integrity: "Разбор",
+    activity: "Активность",
   };
   const go = (p: RoutedPage) => {
     if (p === "duel" || p === "team") setInitialTaskId(null);
@@ -990,6 +997,12 @@ export default function App() {
             <ConnectedIntegrity
               contests={apiContests}
               tasks={apiTasks}
+              organizerId={user.id}
+            />
+          )}
+          {page === "activity" && role === "organizer" && (
+            <ActivityMonitor
+              contests={apiContests.filter((c) => c.organizer_id === user.id)}
               organizerId={user.id}
             />
           )}

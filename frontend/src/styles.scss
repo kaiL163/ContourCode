@@ -882,6 +882,7 @@ a {
 .contest-row {
   padding: 13px 16px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
   border-bottom: 1px solid #233244;

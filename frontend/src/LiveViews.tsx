@@ -13,6 +13,7 @@ import {
 } from "./api";
 import VerdictBadge from "./VerdictBadge";
 import { ContestCover } from "./ContestPage";
+import BrowserActivityMonitor from "./BrowserActivityMonitor";
 import {
   demoExamplesForTask,
   sumDemoNames,
@@ -32,6 +33,7 @@ type Go = (
     | "team"
     | "tasks"
     | "integrity"
+    | "activity"
     | "create-task"
     | "create-contest",
 ) => void;
@@ -446,6 +448,9 @@ export function TaskView({
             : contest?.title}
         </span>
       </div>
+      {contest && !match && (
+        <BrowserActivityMonitor contest={contest} user={user} />
+      )}
       <div className="page-heading">
         <div>
           <h1>
@@ -1249,6 +1254,15 @@ export function OrganizerView({
                 }}
               >
                 Проверка прохождения
+              </button>
+              <button
+                className="button secondary"
+                onClick={() => {
+                  select(c);
+                  go("activity");
+                }}
+              >
+                Активность
               </button>
             </div>
           ))
