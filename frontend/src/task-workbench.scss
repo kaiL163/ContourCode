@@ -1,0 +1,248 @@
+.app-shell .contest-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.app-shell .task-switcher {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.app-shell .task-switcher-label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.app-shell .task-number-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.app-shell .task-number {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--text);
+  font:
+    600 14px/20px "IBM Plex Sans",
+    sans-serif;
+  cursor: pointer;
+}
+.app-shell .task-number:hover:not(:disabled) {
+  background: var(--panel2);
+  border-color: var(--green);
+}
+.app-shell .task-number.selected {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.app-shell .task-number:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+.app-shell .task-number:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.app-shell .contest-workbench .problem-panel,
+.app-shell .contest-workbench .editor-panel {
+  grid-column: auto;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.app-shell .contest-workbench .problem-panel h2 {
+  margin: 0 0 16px;
+}
+.app-shell .contest-workbench .problem-copy {
+  max-width: 76ch;
+  line-height: 1.6;
+}
+.app-shell .contest-workbench .editor-header {
+  margin-bottom: 16px;
+}
+.app-shell .contest-workbench .editor-header h2 {
+  margin: 0;
+}
+.app-shell .contest-workbench #sum-demo {
+  width: min(100%, 360px);
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+}
+.app-shell .contest-workbench .editor-wrap {
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  height: 440px;
+  min-height: 320px;
+  resize: vertical;
+}
+.app-shell .contest-workbench .line-numbers {
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px 10px;
+  font: 14px/1.8 var(--mono);
+}
+.app-shell .contest-workbench .editor-wrap textarea {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 12px;
+  resize: none;
+  overflow: auto;
+  font: 14px/1.8 var(--mono);
+}
+html[data-theme="dark"] .app-shell .task-number.selected {
+  background: #a3d6b2;
+  border-color: #a3d6b2;
+  color: #171a1e;
+}
+@media (max-width: 650px) {
+  .app-shell .task-switcher {
+    padding: 16px;
+    gap: 8px;
+  }
+  .app-shell .task-switcher-label {
+    flex-basis: 100%;
+  }
+  .app-shell .contest-workbench .problem-panel,
+  .app-shell .contest-workbench .editor-panel {
+    padding: 16px;
+  }
+  .app-shell .contest-workbench .editor-wrap {
+    grid-template-columns: 40px minmax(0, 1fr);
+    height: 360px;
+    min-height: 260px;
+  }
+  .app-shell .contest-workbench .line-numbers,
+  .app-shell .contest-workbench .editor-wrap textarea {
+    font-size: 13px;
+  }
+}
+
+.match-random-settings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+.match-random-settings > div {
+  min-width: 0;
+}
+.match-random-settings select {
+  width: 100%;
+}
+.match-task-stepper {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+.match-task-stepper .button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  font-size: 20px;
+}
+.match-task-stepper input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  text-align: center;
+}
+.match-task-stepper input::-webkit-inner-spin-button,
+.match-task-stepper input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+.match-task-stepper input[type="number"] {
+  appearance: textfield;
+}
+.app-shell .match-columns {
+  align-items: start;
+}
+.app-shell .match-round {
+  align-items: stretch;
+  gap: 16px;
+}
+.app-shell .match-round-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+}
+.app-shell .match-round-actions .match-join-button {
+  margin-top: 0;
+}
+.app-shell .duel-exit [role="group"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.app-shell .duel-exit [role="group"] p {
+  flex-basis: 100%;
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .app-shell .match-round {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .match-random-settings {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+.app-shell #join-code {
+  width: 100%;
+  max-width: 100%;
+}
+.match-join-button {
+  margin-top: 12px;
+}
+
+.team-draft-hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.match-workspace-progress {
+  margin-bottom: 16px;
+}
+.match-workspace-progress .duel-exit {
+  margin-top: 16px;
+}
+.app-shell .invitation-panel {
+  max-width: 760px;
+}
+.match-workspace-progress p {
+  margin: 8px 0;
+}
+.match-finish-ready {
+  margin-top: 16px;
+}
+.match-finish-ready p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}

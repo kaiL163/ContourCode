@@ -1,0 +1,70 @@
+.app-shell .task-bank-search {
+  margin-bottom: 16px;
+}
+.app-shell .task-bank-list {
+  padding: 0 24px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.app-shell .task-bank-list .library-row {
+  min-height: 76px;
+  padding: 16px 0;
+  gap: 16px;
+  border: 0;
+}
+.app-shell .task-bank-list .library-row + .library-row {
+  border-top: 1px solid var(--border);
+}
+.app-shell .task-bank-list .library-info {
+  min-width: 0;
+}
+.app-shell .task-bank-list .library-info b {
+  font-size: 15px;
+  line-height: 22px;
+  overflow-wrap: anywhere;
+}
+.app-shell .task-bank-list .library-info span {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.app-shell .task-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.app-shell .task-pagination > div {
+  display: flex;
+  gap: 8px;
+}
+.app-shell .task-pagination .button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.app-shell .task-bank-detail {
+  margin-top: 24px;
+}
+.app-shell .task-bank-statement {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 650px) {
+  .app-shell .task-bank-list {
+    padding: 0 16px;
+  }
+  .app-shell .task-bank-list .library-row {
+    gap: 12px;
+  }
+  .app-shell .task-bank-list .library-info {
+    flex: 1 1 0;
+  }
+  .app-shell .task-pagination {
+    align-items: stretch;
+  }
+}

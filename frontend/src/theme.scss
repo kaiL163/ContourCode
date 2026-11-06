@@ -1,0 +1,592 @@
+/* Theme controls appear on both the landing page and workspace. */
+.theme-switcher {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.theme-switcher .theme-label {
+  padding: 0;
+  font-weight: 600;
+}
+.topbar-right .theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.topbar-right .theme-switcher .theme-label {
+  line-height: 16px;
+}
+.theme-options {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.theme-options button {
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.theme-options button[aria-pressed="true"] {
+  background: var(--panel2);
+  color: var(--green);
+  font-weight: 700;
+  box-shadow: 0 1px 2px #0002;
+}
+.theme-options button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.landing-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+@media (max-width: 650px) {
+  .landing-header-actions {
+    gap: 8px;
+  }
+  .landing-header-actions .landing-state {
+    display: none;
+  }
+  .theme-options button {
+    padding: 5px 7px;
+  }
+  .topbar-right .theme-switcher .theme-label {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .landing-header {
+    height: auto;
+    min-height: 66px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 12px 0;
+    gap: 8px;
+  }
+  .landing-header .brand {
+    flex: 0 0 100%;
+  }
+  .landing-header-actions {
+    width: 100%;
+  }
+  .topbar {
+    height: auto;
+    min-height: 60px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .topbar .brand {
+    flex: 0 0 100%;
+  }
+  .topbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Calm dark mode: restrained forest-green surfaces and readable contrast. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #171d19;
+  --panel: #222a25;
+  --panel2: #2b3730;
+  --border: #414e45;
+  --text: #edf2ee;
+  --muted: #bdc9c0;
+  --faint: #aab8ae;
+  --green: #9bc9a7;
+  --green-deep: #2b3730;
+  --purple: #9bc9a7;
+  --blue: #9bc9a7;
+  color: var(--text);
+  background: var(--bg);
+}
+html[data-theme="dark"] body,
+html[data-theme="dark"] .landing {
+  background: var(--bg);
+  color: var(--text);
+}
+html[data-theme="dark"] .theme-options {
+  background: #171d19;
+  border-color: #414e45;
+}
+html[data-theme="dark"] .theme-options button {
+  color: #bdc9c0;
+}
+html[data-theme="dark"] .theme-options button[aria-pressed="true"] {
+  background: #34443a;
+  color: #c1e0c8;
+}
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .mobile-bottom,
+html[data-theme="dark"] .sidebar.open {
+  background: #222a25;
+  color: #edf2ee;
+  border-color: #414e45;
+}
+html[data-theme="dark"] .brand,
+html[data-theme="dark"] .topbar .brand,
+html[data-theme="dark"] .landing h1 {
+  color: #edf2ee;
+  -webkit-text-fill-color: #edf2ee;
+}
+html[data-theme="dark"] .brand-strong,
+html[data-theme="dark"] .brand-mark,
+html[data-theme="dark"] .landing-state,
+html[data-theme="dark"] .landing-event > span,
+html[data-theme="dark"] .round-brief > svg,
+html[data-theme="dark"] .round-brief li b,
+html[data-theme="dark"] .contest-state,
+html[data-theme="dark"] .text-link,
+html[data-theme="dark"] .mode-link,
+html[data-theme="dark"] .back-link,
+html[data-theme="dark"] .text-button,
+html[data-theme="dark"] .rail-hint strong,
+html[data-theme="dark"] .rail-title span,
+html[data-theme="dark"] .task-select .check-mark {
+  color: #9bc9a7;
+}
+html[data-theme="dark"] .brand-mark {
+  border-color: #9bc9a7;
+}
+html[data-theme="dark"] .brand-mark i {
+  background: #9bc9a7;
+}
+html[data-theme="dark"] .entry-card,
+html[data-theme="dark"] .featured-round,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .task-rail,
+html[data-theme="dark"] .problem-panel,
+html[data-theme="dark"] .editor-panel,
+html[data-theme="dark"] .task-library,
+html[data-theme="dark"] .contest-list {
+  background: #222a25;
+  color: #edf2ee;
+  border-color: #414e45;
+}
+html[data-theme="dark"] .round-brief,
+html[data-theme="dark"] .pair-option-list button,
+html[data-theme="dark"] .results-summary,
+html[data-theme="dark"] .match-banner,
+html[data-theme="dark"] .match-banner.team-banner,
+html[data-theme="dark"] .review-card,
+html[data-theme="dark"] .quick-actions,
+html[data-theme="dark"] .integrity-callout,
+html[data-theme="dark"] .side-help {
+  background: #2b3730;
+  color: #edf2ee;
+  border-color: #414e45;
+}
+html[data-theme="dark"] .button.primary {
+  background: #9bc9a7;
+  color: #17231c;
+  border-color: #9bc9a7;
+}
+html[data-theme="dark"] .button.primary:hover {
+  background: #b7d9bf;
+  color: #17231c;
+}
+html[data-theme="dark"] .button.secondary {
+  background: #222a25;
+  color: #c1e0c8;
+  border-color: #789581;
+}
+html[data-theme="dark"] .nav-item.active,
+html[data-theme="dark"] .mobile-bottom button.selected,
+html[data-theme="dark"] .task-select.chosen {
+  background: #34443a;
+  color: #c1e0c8;
+}
+html[data-theme="dark"] .select-wrap select,
+html[data-theme="dark"] .participant-select,
+html[data-theme="dark"] .copy-row input,
+html[data-theme="dark"] .create-form input,
+html[data-theme="dark"] .create-form select,
+html[data-theme="dark"] .create-form textarea,
+html[data-theme="dark"] .human-review textarea,
+html[data-theme="dark"] .search-field {
+  background: #171d19;
+  color: #edf2ee;
+  border-color: #59685d;
+}
+html[data-theme="dark"] button:focus-visible,
+html[data-theme="dark"] a:focus-visible,
+html[data-theme="dark"] input:focus-visible,
+html[data-theme="dark"] textarea:focus-visible,
+html[data-theme="dark"] select:focus-visible {
+  outline: 2px solid #b7d9bf;
+  outline-offset: 3px;
+}
+
+/* Нейтральные тёмные поверхности и приглушённый зелёный акцент. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #151c18;
+  --panel: #202a24;
+  --panel2: #293a2e;
+  --border: #44564a;
+  --text: #edf4ee;
+  --muted: #c0cec2;
+  --faint: #b1c1b4;
+  --green: #a5d8b4;
+  --green-deep: #293a2e;
+  --purple: #a5d8b4;
+  --blue: #a5d8b4;
+  color: #edf4ee;
+  background: #151c18;
+}
+html[data-theme="dark"] body,
+html[data-theme="dark"] .landing {
+  background: #151c18;
+  color: #edf4ee;
+}
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .mobile-bottom,
+html[data-theme="dark"] .sidebar.open {
+  background: #202a24;
+  color: #edf4ee;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .brand,
+html[data-theme="dark"] .topbar .brand,
+html[data-theme="dark"] .landing h1 {
+  color: #edf4ee;
+  -webkit-text-fill-color: #edf4ee;
+}
+html[data-theme="dark"] .brand-strong,
+html[data-theme="dark"] .brand-mark,
+html[data-theme="dark"] .landing-state,
+html[data-theme="dark"] .landing-event > span,
+html[data-theme="dark"] .round-brief > svg,
+html[data-theme="dark"] .round-brief li b,
+html[data-theme="dark"] .contest-state,
+html[data-theme="dark"] .text-link,
+html[data-theme="dark"] .mode-link,
+html[data-theme="dark"] .back-link,
+html[data-theme="dark"] .text-button,
+html[data-theme="dark"] .rail-hint strong,
+html[data-theme="dark"] .rail-title span,
+html[data-theme="dark"] .task-select .check-mark {
+  color: #a5d8b4;
+}
+html[data-theme="dark"] .brand-mark {
+  border-color: #a5d8b4;
+}
+html[data-theme="dark"] .brand-mark i {
+  background: #a5d8b4;
+}
+html[data-theme="dark"] .brand small,
+html[data-theme="dark"] .topbar .brand small,
+html[data-theme="dark"] .user-meta small,
+html[data-theme="dark"] .side-bottom > span,
+html[data-theme="dark"] .landing-intro,
+html[data-theme="dark"] .landing-note,
+html[data-theme="dark"] .landing-event p,
+html[data-theme="dark"] .landing-event small,
+html[data-theme="dark"] .entry-card > p,
+html[data-theme="dark"] .entry-footer,
+html[data-theme="dark"] .landing-foot,
+html[data-theme="dark"] .page-heading p,
+html[data-theme="dark"] .body-copy,
+html[data-theme="dark"] .featured-copy > p,
+html[data-theme="dark"] .pair-options p,
+html[data-theme="dark"] .field-note,
+html[data-theme="dark"] .subtle,
+html[data-theme="dark"] .round-brief > span,
+html[data-theme="dark"] .pair-option-list small,
+html[data-theme="dark"] .round-details dt,
+html[data-theme="dark"] .contest-facts,
+html[data-theme="dark"] .metric > small,
+html[data-theme="dark"] .live-label,
+html[data-theme="dark"] .timeline-time,
+html[data-theme="dark"] .review-card > p,
+html[data-theme="dark"] .review-legend span,
+html[data-theme="dark"] .task-select small,
+html[data-theme="dark"] .rail-hint,
+html[data-theme="dark"] .rail-title,
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .metric-top,
+html[data-theme="dark"] .small-heading,
+html[data-theme="dark"] .limits strong,
+html[data-theme="dark"] .limits span,
+html[data-theme="dark"] .example-block span,
+html[data-theme="dark"] .recent-result > span,
+html[data-theme="dark"] .select-wrap,
+html[data-theme="dark"] .editor-actions > span,
+html[data-theme="dark"] .results-summary p,
+html[data-theme="dark"] .match-title p,
+html[data-theme="dark"] .submission-data span,
+html[data-theme="dark"] .progress-task small,
+html[data-theme="dark"] .timeline-entry > span:nth-child(2),
+html[data-theme="dark"] .compare-person small,
+html[data-theme="dark"] .library-info span,
+html[data-theme="dark"] .usage-count,
+html[data-theme="dark"] .side-help p,
+html[data-theme="dark"] .quick-actions small {
+  color: #c0cec2;
+}
+html[data-theme="dark"] .entry-card,
+html[data-theme="dark"] .featured-round,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .task-rail,
+html[data-theme="dark"] .problem-panel,
+html[data-theme="dark"] .editor-panel,
+html[data-theme="dark"] .task-library,
+html[data-theme="dark"] .contest-list {
+  background: #202a24;
+  color: #edf4ee;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .round-brief,
+html[data-theme="dark"] .pair-option-list button,
+html[data-theme="dark"] .results-summary,
+html[data-theme="dark"] .match-banner,
+html[data-theme="dark"] .match-banner.team-banner,
+html[data-theme="dark"] .review-card,
+html[data-theme="dark"] .quick-actions,
+html[data-theme="dark"] .integrity-callout,
+html[data-theme="dark"] .side-help {
+  background: #293a2e;
+  color: #edf4ee;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .competition-overview .pair-option-list button,
+html[data-theme="dark"] .quick-actions > button,
+html[data-theme="dark"] .filter-chip {
+  background: #202a24;
+  border-color: #44564a;
+  color: #edf4ee;
+}
+html[data-theme="dark"] .competition-overview .pair-option-list button:hover,
+html[data-theme="dark"] .quick-actions > button:hover,
+html[data-theme="dark"] .filter-chip.active,
+html[data-theme="dark"] .nav-item:hover,
+html[data-theme="dark"] .task-select:hover {
+  background: #344a3a;
+  color: #edf4ee;
+}
+html[data-theme="dark"] .button.primary {
+  background: #a5d8b4;
+  color: #17231c;
+  border-color: #a5d8b4;
+}
+html[data-theme="dark"] .button.primary:hover {
+  background: #c2e6ca;
+  color: #17231c;
+}
+html[data-theme="dark"] .button.secondary {
+  background: #202a24;
+  color: #c2e6ca;
+  border-color: #8dbd9a;
+}
+html[data-theme="dark"] .button.secondary:hover {
+  background: #344a3a;
+  color: #edf4ee;
+}
+html[data-theme="dark"] .button.ghost {
+  color: #c2e6ca;
+}
+html[data-theme="dark"] .nav-item,
+html[data-theme="dark"] .mobile-bottom button {
+  color: #c0cec2;
+}
+html[data-theme="dark"] .nav-item.active,
+html[data-theme="dark"] .mobile-bottom button.selected,
+html[data-theme="dark"] .nav-item.active svg {
+  background: #344a3a;
+  color: #c2e6ca;
+}
+html[data-theme="dark"] .avatar,
+html[data-theme="dark"] .task-letter.done,
+html[data-theme="dark"] .help-orb,
+html[data-theme="dark"] .mode-icon,
+html[data-theme="dark"] .role-icon,
+html[data-theme="dark"] .quick-icon,
+html[data-theme="dark"] .review-icon,
+html[data-theme="dark"] .match-graphic {
+  background: #344a3a !important;
+  color: #c2e6ca !important;
+}
+html[data-theme="dark"] .task-letter,
+html[data-theme="dark"] .contest-emblem,
+html[data-theme="dark"] .submission-dot {
+  background: #293a2e;
+  color: #c2e6ca;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .task-select {
+  color: #edf4ee;
+}
+html[data-theme="dark"] .task-select.chosen {
+  background: #344a3a;
+  border-color: #8dbd9a;
+  color: #edf4ee;
+}
+html[data-theme="dark"] .problem-copy,
+html[data-theme="dark"] .problem-copy code,
+html[data-theme="dark"] .body-copy code,
+html[data-theme="dark"] .example-block pre {
+  color: #edf4ee;
+}
+html[data-theme="dark"] .problem-copy code,
+html[data-theme="dark"] .body-copy code,
+html[data-theme="dark"] .example-block pre {
+  background: #344a3a;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .editor-wrap,
+html[data-theme="dark"] .code-compare,
+html[data-theme="dark"] .form-note,
+html[data-theme="dark"] .task-picker,
+html[data-theme="dark"] .compare-pair {
+  background: #151c18;
+  color: #edf4ee;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .editor-wrap textarea,
+html[data-theme="dark"] .code-compare pre {
+  color: #edf4ee;
+}
+html[data-theme="dark"] .line-numbers {
+  color: #b1c1b4;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .select-wrap select,
+html[data-theme="dark"] .participant-select,
+html[data-theme="dark"] .copy-row input,
+html[data-theme="dark"] .create-form input,
+html[data-theme="dark"] .create-form select,
+html[data-theme="dark"] .create-form textarea,
+html[data-theme="dark"] .human-review textarea,
+html[data-theme="dark"] .search-field,
+html[data-theme="dark"] .theme-switcher select {
+  background: #151c18;
+  color: #edf4ee;
+  border-color: #687d6d;
+}
+html[data-theme="dark"] .search-field input {
+  color: #edf4ee;
+}
+html[data-theme="dark"] .search-field input::placeholder,
+html[data-theme="dark"] .theme-switcher {
+  color: #c0cec2;
+}
+html[data-theme="dark"] .field-label,
+html[data-theme="dark"] .create-form label,
+html[data-theme="dark"] .task-picker > label {
+  color: #edf4ee;
+}
+html[data-theme="dark"] .status.ok,
+html[data-theme="dark"] .state-pill.open {
+  background: #293a2e;
+  border-color: #567b60;
+  color: #c2e6ca;
+}
+html[data-theme="dark"] .status.neutral,
+html[data-theme="dark"] .status.pending,
+html[data-theme="dark"] .state-pill.done {
+  background: #293a2e;
+  border-color: #687d6d;
+  color: #d2ded4;
+}
+html[data-theme="dark"] .status.bad {
+  background: #492d2b;
+  border-color: #a56e68;
+  color: #ffd2cc;
+}
+html[data-theme="dark"] .status.warn,
+html[data-theme="dark"] .state-pill.draft {
+  background: #453a25;
+  border-color: #9e8858;
+  color: #ffe3a8;
+}
+html[data-theme="dark"] .timer-chip,
+html[data-theme="dark"] .live-indicator,
+html[data-theme="dark"] .private-label {
+  background: #293a2e;
+  color: #c2e6ca;
+  border-color: #567b60;
+}
+html[data-theme="dark"] .timer-chip b,
+html[data-theme="dark"] .score-block b,
+html[data-theme="dark"] .progress-ring,
+html[data-theme="dark"] .match-score b,
+html[data-theme="dark"] .match-time {
+  color: #edf4ee;
+}
+html[data-theme="dark"] .table-scroll th,
+html[data-theme="dark"] .table-scroll td {
+  color: #edf4ee;
+  border-color: #44564a;
+}
+html[data-theme="dark"] .table-scroll th {
+  color: #c0cec2;
+}
+html[data-theme="dark"] .self-row {
+  background: #293a2e;
+}
+html[data-theme="dark"] .rank,
+html[data-theme="dark"] .rank.first,
+html[data-theme="dark"] .score-cell,
+html[data-theme="dark"] .you-tag {
+  color: #c2e6ca;
+}
+html[data-theme="dark"] .panel-foot,
+html[data-theme="dark"] .table-foot,
+html[data-theme="dark"] .submission-item,
+html[data-theme="dark"] .progress-task,
+html[data-theme="dark"] .timeline-entry,
+html[data-theme="dark"] .human-review,
+html[data-theme="dark"] .recent-result,
+html[data-theme="dark"] .rail-hint,
+html[data-theme="dark"] .example-block,
+html[data-theme="dark"] .invite-people > div,
+html[data-theme="dark"] .organizer-table td {
+  border-color: #44564a;
+}
+html[data-theme="dark"] .similarity-annotation,
+html[data-theme="dark"] .integrity-callout p,
+html[data-theme="dark"] .form-note {
+  color: #c0cec2;
+}
+html[data-theme="dark"] .similarity-meter {
+  background: #44564a;
+}
+html[data-theme="dark"] .similarity-meter span {
+  background: #a5d8b4;
+}
+html[data-theme="dark"] .toast {
+  background: #293a2e;
+  color: #edf4ee;
+  border-color: #687d6d;
+}
+html[data-theme="dark"] .top-icon,
+html[data-theme="dark"] .mobile-menu {
+  color: #c2e6ca;
+}
+html[data-theme="dark"] button:focus-visible,
+html[data-theme="dark"] a:focus-visible,
+html[data-theme="dark"] input:focus-visible,
+html[data-theme="dark"] textarea:focus-visible,
+html[data-theme="dark"] select:focus-visible {
+  outline: 2px solid #c2e6ca;
+  outline-offset: 3px;
+}

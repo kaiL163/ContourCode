@@ -1,0 +1,24 @@
+/* Общий внешний вид стандартных полей; составные поля и редактор оформляются отдельно. */
+.app-shell :where(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]),
+  select,
+  textarea
+):not(.search-field input):not(.cm-editor *) {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--panel);
+  color: var(--text);
+  font: inherit;
+}
+
+.app-shell :where(input, select, textarea):not(.cm-editor *):focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.app-shell :where(input, textarea)::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}

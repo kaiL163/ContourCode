@@ -1,0 +1,330 @@
+/* Оформление подключённых экранов: используем те же компоненты, что и в прототипе. */
+.login-profile-list {
+  grid-template-columns: 1fr;
+}
+.login-profile-copy strong {
+  font-size: 13px;
+}
+.app-shell .layout {
+  align-items: start;
+  align-content: start;
+}
+.app-shell .main-content {
+  align-self: start;
+  margin-block: 0;
+  min-width: 0;
+}
+.app-shell .contest-list {
+  padding-inline: 24px;
+}
+.app-shell .contest-list .contest-row {
+  gap: 16px;
+  padding-block: 22px;
+}
+.app-shell .contest-main {
+  min-width: 0;
+}
+.app-shell .contest-main > b {
+  font-size: 18px;
+  line-height: 1.4;
+}
+.app-shell .contest-main .body-copy {
+  margin: 8px 0;
+}
+.app-shell .contest-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 13px;
+}
+.app-shell .page-heading + .contest-list {
+  margin-top: 0;
+}
+.app-shell .pair-options h2,
+.app-shell .panel h2 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+.app-shell .pair-option-list button {
+  text-align: left;
+  min-height: 52px;
+  padding: 12px 16px;
+  color: var(--text);
+}
+.app-shell .problem-panel h2 {
+  margin: 0 0 20px;
+  font-size: 22px;
+  line-height: 1.3;
+}
+.app-shell .problem-copy {
+  overflow-wrap: anywhere;
+}
+.app-shell .example-block pre {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.app-shell .example-block span,
+.app-shell .example-block b {
+  font-size: 13px;
+}
+.app-shell .task-rail .task-select {
+  width: 100%;
+  text-align: left;
+  gap: 10px;
+}
+.app-shell .task-select b {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.app-shell .back-link {
+  font-size: 14px;
+}
+.app-shell .results-grid .panel > h2,
+.app-shell .match-columns .panel > h2 {
+  margin: 0 0 20px;
+}
+.app-shell .results-board {
+  width: 100%;
+  min-width: 0;
+}
+.app-shell .results-board-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.app-shell .results-board-heading h2 {
+  margin: 0 0 6px;
+}
+.app-shell .results-board-heading .body-copy {
+  max-width: 76ch;
+  margin: 0;
+  line-height: 1.5;
+}
+.app-shell .results-live-indicator {
+  flex: none;
+  color: var(--muted);
+  font-size: 13px;
+}
+.app-shell .results-board-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+.app-shell .results-col-rank {
+  width: 54px;
+}
+.app-shell .results-col-participant {
+  width: 210px;
+}
+.app-shell .results-col-score {
+  width: 100px;
+}
+.app-shell .results-board-table th:first-child,
+.app-shell .results-board-table td:first-child {
+  width: 54px;
+  text-align: center;
+}
+.app-shell .results-board-table .results-participant-name {
+  width: 190px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.app-shell .results-participant-name > span,
+.app-shell .results-participant-name > small,
+.app-shell .results-total-score > b,
+.app-shell .results-total-score > small {
+  display: block;
+}
+.app-shell .results-participant-name > small,
+.app-shell .results-total-score > small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+.app-shell .results-total-score {
+  width: 100px;
+  white-space: nowrap;
+}
+.app-shell .results-task-grid {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+.app-shell .results-task-state {
+  min-width: 0;
+  padding: 8px;
+  border-left: 2px solid var(--border);
+  background: var(--panel2);
+  overflow: hidden;
+  min-height: 76px;
+}
+.app-shell .results-task-title {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.app-shell .results-task-title > span {
+  flex: none;
+  color: var(--green);
+}
+.app-shell .results-task-title {
+  text-overflow: ellipsis;
+}
+.app-shell .results-task-title:not(span) { min-width: 0; }
+.app-shell .results-task-state > span {
+  display: block;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .results-task-verdict {
+  font-size: 11px;
+  font-weight: 600;
+}
+.app-shell .results-task-points {
+  color: var(--muted);
+  font-size: 12px;
+}
+.app-shell .results-task-live-errors {
+  color: var(--red, #b42318);
+  font-size: 11px;
+}
+.app-shell .results-task-state.is-solved {
+  border-left-color: var(--green);
+}
+.app-shell .results-task-state.is-solved .results-task-verdict {
+  color: var(--green);
+}
+.app-shell .results-task-state.is-attempted {
+  border-left-color: var(--red, #b42318);
+}
+.app-shell .results-task-state.is-attempted .results-task-verdict {
+  color: var(--red, #b42318);
+}
+.app-shell .results-task-state.is-checking {
+  border-left-color: var(--amber, #946200);
+}
+.app-shell .results-task-state.is-checking .results-task-verdict {
+  color: var(--amber, #946200);
+}
+.app-shell .results-board-table tbody tr:hover .results-participant-name {
+  color: var(--text);
+}
+.app-shell .copy-row {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+}
+.app-shell .copy-row input {
+  min-width: 0;
+  flex: 1;
+}
+.app-shell .match-columns .field-label {
+  display: block;
+  margin: 20px 0 8px;
+}
+.app-shell .table-scroll {
+  max-width: 100%;
+}
+html[data-theme="dark"] .app-shell .pair-option-list button {
+  color: var(--text);
+}
+@media (max-width: 650px) {
+  .app-shell .contest-list {
+    padding-inline: 16px;
+  }
+  .app-shell .contest-list .contest-row {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .app-shell .contest-main {
+    flex-basis: 100%;
+  }
+  .app-shell .contest-list .contest-row .button {
+    flex: 1 1 auto;
+  }
+  .app-shell .task-rail .task-select {
+    min-width: 0;
+  }
+  .app-shell .copy-row {
+    flex-wrap: wrap;
+  }
+  .app-shell .copy-row input {
+    flex-basis: 100%;
+  }
+  .app-shell .results-board-heading {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .app-shell .results-board-table,
+  .app-shell .results-board-table tbody {
+    display: block;
+  }
+  .app-shell .results-board-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+  .app-shell .results-board-table tbody tr {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    gap: 0 8px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .app-shell .results-board-table tbody td,
+  .app-shell .results-board-table tbody th {
+    width: auto;
+    min-width: 0;
+    padding: 6px 4px;
+    border: 0;
+  }
+  .app-shell .results-board-table tbody td:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .app-shell .results-board-table tbody .results-participant-name {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .app-shell .results-board-table tbody .results-total-score {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+  }
+  .app-shell .results-board-table tbody td:nth-child(3) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .app-shell .results-task-grid {
+    gap: 3px;
+  }
+  .app-shell .results-task-state {
+    padding: 6px 4px;
+  }
+  .app-shell .results-task-title,
+  .app-shell .results-task-verdict,
+  .app-shell .results-task-points {
+    font-size: 10px;
+  }
+}

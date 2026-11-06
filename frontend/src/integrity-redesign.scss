@@ -1,0 +1,207 @@
+.app-shell .review-workspace {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  margin-top: 16px;
+}
+.app-shell .review-workspace .panel,
+.app-shell .review-followup .panel {
+  min-width: 0;
+  padding: 24px;
+}
+.app-shell .review-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.app-shell .review-section-heading h2,
+.app-shell .review-conclusion h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+}
+.app-shell .review-section-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.app-shell .review-section-heading > span:not(.verdict-badge) {
+  color: var(--muted);
+  font-size: 14px;
+}
+.app-shell .review-list .participant-select {
+  margin-bottom: 12px;
+}
+.app-shell .review-submissions {
+  display: grid;
+  gap: 4px;
+}
+.app-shell .review-submission {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  text-align: left;
+  gap: 4px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+}
+.app-shell .review-submission:hover,
+.app-shell .review-submission.selected {
+  background: var(--panel2);
+  border-color: var(--border);
+}
+.app-shell .review-submission:focus-visible,
+.app-shell .review-code:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.app-shell .review-submission-title {
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.app-shell .review-submission-meta {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted);
+}
+.app-shell .review-submission .verdict-badge {
+  margin-top: 4px;
+}
+.app-shell .review-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.app-shell .review-pagination > div {
+  display: flex;
+  gap: 8px;
+}
+.app-shell .review-pagination .button {
+  padding: 8px;
+}
+.app-shell .review-pagination .button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.app-shell .review-code {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  overflow: auto;
+  max-height: 560px;
+  min-height: 300px;
+}
+.app-shell .review-code pre {
+  margin: 0;
+  padding: 16px 0;
+  min-width: max-content;
+  font: 14px/1.65 var(--mono);
+  color: inherit;
+}
+.app-shell .review-code-line {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  padding-right: 24px;
+  white-space: pre;
+}
+.app-shell .review-line-number {
+  color: var(--muted);
+  text-align: right;
+  padding-right: 16px;
+  user-select: none;
+}
+.app-shell .review-empty {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 12px 0 0;
+}
+.app-shell .review-main {
+  min-width: 0;
+}
+.app-shell .review-followup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  margin-top: 16px;
+}
+.app-shell .review-analysis .button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.app-shell .review-conclusion textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 16px;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+.app-shell .review-conclusion h2 {
+  margin-bottom: 16px;
+}
+.app-shell .integrity-report {
+  max-width: 100%;
+  max-height: 24rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.6 var(--mono);
+}
+@media (max-width: 900px) {
+  .app-shell .review-workspace,
+  .app-shell .review-followup {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .app-shell .review-workspace .panel,
+  .app-shell .review-followup .panel {
+    padding: 16px;
+  }
+  .app-shell .review-section-heading {
+    flex-wrap: wrap;
+  }
+  .app-shell .review-code {
+    min-height: 220px;
+    max-height: 400px;
+  }
+  .app-shell .review-code pre {
+    font-size: 13px;
+  }
+  .app-shell .review-line-number {
+    padding-right: 12px;
+  }
+  .app-shell .review-code-line {
+    grid-template-columns: 40px 1fr;
+  }
+}

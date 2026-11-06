@@ -20,7 +20,7 @@
 .app-shell .page-heading h1 {
   font-size: clamp(30px, 2.4vw, 40px);
   line-height: 1.15;
-  letter-spacing: -.035em;
+  letter-spacing: -0.035em;
   font-weight: 700;
 }
 .app-shell .page-heading p,
@@ -58,9 +58,17 @@
   box-shadow: none;
   background: transparent;
 }
-.app-shell .metric:last-child { border-right: 0; }
-.app-shell .metric > strong { font-size: clamp(25px, 2vw, 32px); line-height: 1.2; }
-.app-shell .metric > small { color: var(--muted); font-size: 13px; }
+.app-shell .metric:last-child {
+  border-right: 0;
+}
+.app-shell .metric > strong {
+  font-size: clamp(25px, 2vw, 32px);
+  line-height: 1.2;
+}
+.app-shell .metric > small {
+  color: var(--muted);
+  font-size: 13px;
+}
 
 .app-shell .panel,
 .app-shell .task-rail,
@@ -70,7 +78,9 @@
 .app-shell .task-library {
   box-shadow: none;
 }
-.app-shell .panel { padding: clamp(20px, 2vw, 28px); }
+.app-shell .panel {
+  padding: clamp(20px, 2vw, 28px);
+}
 
 /* Группируем данные линиями, а не вложенными карточками. */
 .app-shell .competition-overview .featured-round {
@@ -92,13 +102,23 @@
   border-bottom: 1px solid var(--border);
   border-radius: 0;
 }
-.app-shell .side-help { background: transparent; border: 0; border-top: 1px solid var(--border); }
-.app-shell .side-help button { color: var(--green); font-size: 13px; }
+.app-shell .side-help {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.app-shell .side-help button {
+  color: var(--green);
+  font-size: 13px;
+}
 
 .app-shell .panel-head h2,
 .app-shell .section-title-row h2,
 .app-shell .problem-head h2,
-.app-shell .editor-header h2 { font-size: 20px; line-height: 1.3; }
+.app-shell .editor-header h2 {
+  font-size: 20px;
+  line-height: 1.3;
+}
 .app-shell .contest-row,
 .app-shell .submission-item,
 .app-shell .progress-task,
@@ -113,14 +133,19 @@
 .app-shell .progress-task + .progress-task,
 .app-shell .timeline-entry + .timeline-entry,
 .app-shell .recent-result + .recent-result,
-.app-shell .library-row + .library-row { border-top: 1px solid var(--border); }
+.app-shell .library-row + .library-row {
+  border-top: 1px solid var(--border);
+}
 
 .app-shell .table-scroll {
   overflow-x: auto;
   border: 0;
   border-radius: 0;
 }
-.app-shell .table-scroll table { width: 100%; border-collapse: collapse; }
+.app-shell .table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
 .app-shell .table-scroll th {
   padding: 12px 14px;
   text-align: left;
@@ -132,46 +157,123 @@
   letter-spacing: 0;
   white-space: nowrap;
 }
-.app-shell .table-scroll td { padding: 14px; line-height: 1.5; vertical-align: middle; }
-.app-shell .table-scroll tbody tr + tr td { border-top: 1px solid var(--border); }
-.app-shell .table-scroll tbody tr:hover { background: color-mix(in srgb, var(--panel2) 55%, transparent); }
+.app-shell .table-scroll td {
+  padding: 14px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+.app-shell .table-scroll tbody tr + tr td {
+  border-top: 1px solid var(--border);
+}
+.app-shell .table-scroll tbody tr:hover {
+  background: color-mix(in srgb, var(--panel2) 55%, transparent);
+}
 
-.app-shell .button { min-height: 44px; font-size: 15px; }
+.app-shell .button {
+  min-height: 44px;
+  font-size: 15px;
+}
 .app-shell input,
 .app-shell select,
-.app-shell textarea { min-height: 44px; font-size: 15px; }
-.app-shell textarea { line-height: 1.6; }
-.app-shell :focus-visible { outline-offset: 3px; }
+.app-shell textarea {
+  min-height: 44px;
+  font-size: 15px;
+}
+.app-shell textarea {
+  line-height: 1.6;
+}
+.app-shell :focus-visible {
+  outline-offset: 3px;
+}
 
 @media (min-width: 1500px) {
-  .app-shell .layout { grid-template-columns: clamp(220px, 17vw, 270px) minmax(0, 1fr); }
+  .app-shell .layout {
+    grid-template-columns: clamp(220px, 17vw, 270px) minmax(0, 1fr);
+  }
 }
 @media (max-width: 900px) {
-  .app-shell .main-content { padding: 28px 24px 88px; }
-  .app-shell .contest-workbench { grid-template-columns: minmax(180px, .65fr) minmax(0, 1fr); }
-  .app-shell .editor-panel { grid-column: 1 / -1; }
-  .app-shell .metric { padding: 16px 14px; }
+  .app-shell .main-content {
+    padding: 28px 24px 88px;
+  }
+  .app-shell .contest-workbench {
+    grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1fr);
+  }
+  .app-shell .editor-panel {
+    grid-column: 1 / -1;
+  }
+  .app-shell .metric {
+    padding: 16px 14px;
+  }
 }
 @media (max-width: 650px) {
-  .app-shell .main-content { padding: 24px 16px calc(96px + env(safe-area-inset-bottom)); }
-  .app-shell .page-heading { display: flex; flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 24px; }
-  .app-shell .page-heading h1 { font-size: 30px; }
+  .app-shell .main-content {
+    padding: 24px 16px calc(96px + env(safe-area-inset-bottom));
+  }
+  .app-shell .page-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .app-shell .page-heading h1 {
+    font-size: 30px;
+  }
   .app-shell .page-heading p,
   .app-shell .body-copy,
-  .app-shell .problem-copy { font-size: 16px; }
-  .app-shell .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .app-shell .metric { border-bottom: 1px solid var(--border); }
-  .app-shell .metric:nth-child(2n) { border-right: 0; }
-  .app-shell .metric:nth-last-child(-n+2) { border-bottom: 0; }
-  .app-shell .contest-workbench { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .app-shell .editor-panel { grid-column: auto; }
-  .app-shell .table-scroll table { min-width: 620px; }
-  .app-shell .table-scroll::before { content: 'Таблицу можно прокрутить вбок →'; display: block; position: sticky; left: 0; width: max-content; max-width: 100%; padding: 0 0 10px; color: var(--muted); font-size: 13px; }
+  .app-shell .problem-copy {
+    font-size: 16px;
+  }
+  .app-shell .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .app-shell .metric {
+    border-bottom: 1px solid var(--border);
+  }
+  .app-shell .metric:nth-child(2n) {
+    border-right: 0;
+  }
+  .app-shell .metric:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+  .app-shell .contest-workbench {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .app-shell .editor-panel {
+    grid-column: auto;
+  }
+  .app-shell .table-scroll table {
+    min-width: 620px;
+  }
+  .app-shell .table-scroll::before {
+    content: "Таблицу можно прокрутить вбок →";
+    display: block;
+    position: sticky;
+    left: 0;
+    width: max-content;
+    max-width: 100%;
+    padding: 0 0 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
   .app-shell .table-scroll th,
-  .app-shell .table-scroll td { padding: 12px; }
-  .app-shell .button { min-height: 44px; }
-  .app-shell .competition-overview .round-brief { border-left: 0; border-top: 1px solid var(--border); padding-inline: 0; }
+  .app-shell .table-scroll td {
+    padding: 12px;
+  }
+  .app-shell .button {
+    min-height: 44px;
+  }
+  .app-shell .competition-overview .round-brief {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding-inline: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .app-shell *, .app-shell *::before, .app-shell *::after { scroll-behavior: auto; }
+  .app-shell *,
+  .app-shell *::before,
+  .app-shell *::after {
+    scroll-behavior: auto;
+  }
 }

@@ -1,0 +1,1 @@
+ALTER TABLE contests ADD COLUMN IF NOT EXISTS cover_image TEXT;

@@ -1,0 +1,101 @@
+.app-shell .code-editor {
+  --code-keyword: #7b3274;
+  --code-type: #215b85;
+  --code-string: #9a4023;
+  --code-number: #265d82;
+  --code-comment: #476b50;
+  --code-meta: #825219;
+  --code-function: #684c92;
+  margin-top: 16px;
+  height: 440px;
+  min-height: 260px;
+  resize: vertical;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+}
+.app-shell .code-editor:focus-within {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.app-shell .code-editor .cm-editor {
+  height: 100%;
+  color: var(--text);
+  font: 14px/1.8 var(--mono);
+}
+.app-shell .code-editor .cm-editor.cm-focused {
+  outline: none;
+}
+.app-shell .code-editor .cm-scroller {
+  overflow: auto;
+  font: inherit;
+}
+.app-shell .code-editor .cm-content {
+  min-height: 100%;
+  padding: 12px 0;
+  caret-color: var(--text);
+}
+.app-shell .code-editor .cm-line {
+  padding: 0 12px;
+}
+.app-shell .code-editor .cm-gutters {
+  padding-top: 12px;
+  background: var(--bg);
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+}
+.app-shell .code-editor .cm-lineNumbers .cm-gutterElement {
+  padding: 0 10px 0 8px;
+  min-width: 40px;
+}
+.app-shell .code-editor .cm-activeLine,
+.app-shell .code-editor .cm-activeLineGutter {
+  background: var(--panel2);
+}
+.app-shell .code-editor .cm-selectionBackground,
+.app-shell .code-editor .cm-content ::selection {
+  background: #b4d4bc;
+}
+.app-shell .code-editor .syntax-keyword {
+  color: var(--code-keyword);
+}
+.app-shell .code-editor .syntax-type {
+  color: var(--code-type);
+}
+.app-shell .code-editor .syntax-string {
+  color: var(--code-string);
+}
+.app-shell .code-editor .syntax-number {
+  color: var(--code-number);
+}
+.app-shell .code-editor .syntax-comment {
+  color: var(--code-comment);
+}
+.app-shell .code-editor .syntax-meta {
+  color: var(--code-meta);
+}
+.app-shell .code-editor .syntax-function {
+  color: var(--code-function);
+}
+html[data-theme="dark"] .app-shell .code-editor {
+  --code-keyword: #e3b8df;
+  --code-type: #abd1ed;
+  --code-string: #f3c1a7;
+  --code-number: #afd5ed;
+  --code-comment: #afd1b3;
+  --code-meta: #e5ce9d;
+  --code-function: #d2c4ed;
+}
+html[data-theme="dark"] .app-shell .code-editor .cm-selectionBackground,
+html[data-theme="dark"] .app-shell .code-editor .cm-content ::selection {
+  background: #415f4a;
+}
+@media (max-width: 650px) {
+  .app-shell .code-editor {
+    height: 360px;
+  }
+  .app-shell .code-editor .cm-editor {
+    font-size: 13px;
+  }
+}
