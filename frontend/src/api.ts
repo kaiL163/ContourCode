@@ -385,7 +385,7 @@ export const api = {
   match: (id: number) => request<Match>(`/matches/${id}`),
   matchByPublicId: (id: string) =>
     request<Match>(`/matches/public/${encodeURIComponent(id)}`),
-  duelHistory: () => request<Match[]>("/matches/history"),
+  duelHistory: (mode: "duel" | "team" = "duel") => request<Match[]>(`/matches/history?mode=${mode}`),
   declineInvitation: (id: string, token: string) =>
     request<{ status: string }>(
       `/invitations/${encodeURIComponent(id)}/decline`,

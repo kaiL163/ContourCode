@@ -964,9 +964,11 @@ def _match(mid, user):
 
 
 @app.get("/api/matches/history")
-def match_history(user=Depends(require_role("participant"))):
+def match_history(mode: str = "duel", user=Depends(require_role("participant"))):
+    if mode not in ("duel", "team"):
+        raise HTTPException(422, "Неизвестный режим")
     with connection() as c:
-        rows = c.execute("SELECT id FROM matches WHERE mode='duel' AND %s=ANY(participant_ids) ORDER BY id DESC", (user["id"],)).fetchall()
+        rows = c.execute("SELECT id FROM matches WHERE mode=%s AND %s=ANY(participant_ids) ORDER BY id DESC", (mode, user["id"])).fetchall()
     return [_match(row[0], user) for row in rows]
 
 

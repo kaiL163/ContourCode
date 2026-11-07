@@ -29,6 +29,7 @@ type Go = (
     | "contest"
     | "match-workspace"
     | "duel-history"
+    | "team-history"
     | "contest-detail"
     | "results"
     | "duel"
@@ -994,15 +995,13 @@ export function MatchView({
               : "Пригласите напарника: задачи и результат будут общими."}
           </p>
         </div>
-        {mode === "duel" && (
           <button
             type="button"
             className="button secondary"
-            onClick={() => go("duel-history")}
+            onClick={() => go(mode === "duel" ? "duel-history" : "team-history")}
           >
-            История дуэлей
+            {mode === "duel" ? "История дуэлей" : "История командных раундов"}
           </button>
-        )}
       </div>
       {error && <p role="alert">{error}</p>}
       {invite ? (

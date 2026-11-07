@@ -105,7 +105,7 @@ type Page =
   | "organizer-results"
   | "contest-detail"
   | "profile";
-type RoutedPage = Page | "invitation" | "duel-history";
+type RoutedPage = Page | "invitation" | "duel-history" | "team-history";
 const pagePaths: Record<Page, string> = {
   home: "/",
   contests: "/contests",
@@ -128,6 +128,7 @@ const pagePaths: Record<Page, string> = {
 function pageFromPath(path: string): RoutedPage {
   if (/^\/(duels|teams)\/[^/]+\/invite\/?$/.test(path)) return "invitation";
   if (path === "/duels/history") return "duel-history";
+  if (path === "/teams/history") return "team-history";
   if (/^\/(duels|teams)\/[^/]+\/tasks\/?$/.test(path)) return "match-workspace";
   if (/^\/duels\/[^/]+\/?$/.test(path)) return "duel";
   if (/^\/teams\/[^/]+\/?$/.test(path)) return "team";
@@ -586,6 +587,7 @@ export default function App() {
     if (p === "duel" || p === "team") setInitialTaskId(null);
     setPage(p);
     if (p === "duel-history") navigate("/duels/history");
+    else if (p === "team-history") navigate("/teams/history");
     else if (p !== "invitation") {
       const dynamic =
         activeMatch &&
@@ -941,12 +943,14 @@ export default function App() {
               }}
             />
           )}
-          {page === "duel-history" && role === "participant" && (
+          {(page === "duel-history" || page === "team-history") && role === "participant" && (
             <DuelHistory
+              key={page}
+              mode={page === "team-history" ? "team" : "duel"}
               userId={user.id}
               onOpen={(m) => {
                 updateActiveMatch(m);
-                navigate(`/duels/${m.public_id}`);
+                navigate(`/${m.mode === "duel" ? "duels" : "teams"}/${m.public_id}`);
               }}
             />
           )}

@@ -139,9 +139,11 @@ export function InvitationPage({
 export function DuelHistory({
   onOpen,
   userId,
+  mode = "duel",
 }: {
   onOpen: (match: Match) => void;
   userId: number;
+  mode?: "duel" | "team";
 }) {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
@@ -151,7 +153,7 @@ export function DuelHistory({
   useEffect(() => {
     let alive = true;
     api
-      .duelHistory()
+      .duelHistory(mode)
       .then((items) => {
         if (alive) setMatches(items);
       })
@@ -167,19 +169,19 @@ export function DuelHistory({
     return () => {
       alive = false;
     };
-  }, []);
+  }, [mode]);
   const pages = Math.max(1, Math.ceil(matches.length / pageSize));
   const current = Math.min(page, pages);
   return (
     <>
       <div className="page-heading">
         <div>
-          <h1>История дуэлей</h1>
-          <p>Ваши дуэли и их результаты.</p>
+          <h1>{mode === "duel" ? "История дуэлей" : "История командных раундов"}</h1>
+          <p>{mode === "duel" ? "Ваши дуэли и их результаты." : "Ваши командные раунды и их результаты."}</p>
         </div>
       </div>
       {loading ? (
-        <p role="status">Загружаем дуэли…</p>
+        <p role="status">Загружаем историю…</p>
       ) : error ? (
         <p role="alert">{error}</p>
       ) : matches.length ? (
@@ -189,14 +191,16 @@ export function DuelHistory({
             .map((m) => (
             <div className="submission-item" key={m.id}>
               <div className="submission-data">
-                <b>Дуэль {m.public_id}</b>
+                <b>{mode === "duel" ? "Дуэль" : "Командный раунд"} {m.public_id}</b>
                 <span>
                   {m.started_at
                     ? new Date(m.started_at).toLocaleString("ru-RU")
                     : "Ожидание участника"}{" "}
                   ·{" "}
                   {m.status === "finished"
-                    ? m.winner_id === null
+                    ? mode === "team"
+                      ? `Завершён · решено ${m.team_solved ?? 0} из ${m.task_ids.length}`
+                      : m.winner_id === null
                       ? "Ничья"
                       : m.winner_id === userId
                         ? "Победа"
@@ -223,9 +227,9 @@ export function DuelHistory({
             </div>
             ))}
           {pages > 1 && (
-            <nav className="personal-pagination" aria-label="Страницы дуэлей">
+            <nav className="personal-pagination" aria-label="Страницы истории раундов">
               <span aria-live="polite">
-                Страница {current} из {pages} · дуэлей: {matches.length}
+                Страница {current} из {pages} · раундов: {matches.length}
               </span>
               <div>
                 <button
@@ -250,7 +254,7 @@ export function DuelHistory({
         </section>
       ) : (
         <div className="panel">
-          <p>Пока нет дуэлей.</p>
+          <p>{mode === "duel" ? "Пока нет дуэлей." : "Пока нет командных раундов."}</p>
         </div>
       )}
     </>
