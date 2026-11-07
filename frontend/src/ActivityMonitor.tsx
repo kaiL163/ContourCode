@@ -362,7 +362,7 @@ export default function ActivityMonitor({
             </div>
             <p className="body-copy">{detail.disclaimer}</p>
             <h3>Хронология</h3>
-            <div className="history-timeline">
+            <div className="history-timeline activity-timeline" role="region" aria-label="Хронология активности" tabIndex={0}>
               {detail.timeline.map((item) => (
                 <div className="timeline-row" key={item.event_id}>
                   <div className="timeline-time">{formatTime(item.occurred_at)}</div>
